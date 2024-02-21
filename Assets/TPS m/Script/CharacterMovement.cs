@@ -12,6 +12,10 @@ public class CharacterMovement : MonoBehaviour
     public float turnSmooth = 0.1f;
     public float turnSmoothVelocity;
 
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+    public bool isGrounded;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -47,5 +51,7 @@ public class CharacterMovement : MonoBehaviour
         {
             animator.SetFloat("Speed", 0f);
         }
+
+        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
     }
 }
