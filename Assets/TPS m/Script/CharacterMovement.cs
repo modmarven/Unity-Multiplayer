@@ -16,6 +16,9 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask groundMask;
     public bool isGrounded;
 
+    public float gravity = -9.81f;
+    private Vector3 velocity;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -52,6 +55,10 @@ public class CharacterMovement : MonoBehaviour
             animator.SetFloat("Speed", 0f);
         }
 
-        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask); // Ground Check
+
+        // Gravity apply the player
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
