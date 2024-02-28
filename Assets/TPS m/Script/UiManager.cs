@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
@@ -10,6 +8,12 @@ public class UiManager : MonoBehaviour
     public Button startHostButton;
     public Button startServerButton;
     public Button startClientButton;
+    public TextMeshProUGUI playerInside;
+
+    public GameObject mainCam;
+
+    
+
 
     private void Awake()
     {
@@ -18,11 +22,13 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+
         startHostButton.onClick.AddListener(() =>
         {
             if (NetworkManager.Singleton.StartHost())
             {
-                NetworkLog.LogInfo("Host Started........");
+               mainCam.SetActive(false);
+               Debug.Log("Host Started...");
             }
 
             else
@@ -59,5 +65,6 @@ public class UiManager : MonoBehaviour
             }
 
         });
+
     }
 }
